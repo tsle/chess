@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>chessboard.js &raquo; Home</title>
+    <meta name="viewport" content="width=980px, initial-scale=1">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" />
+    <link rel="stylesheet" href="css/chessboard-0.3.0.css" />
+  </head>
+  <script src="js/jquery-2.1.0.min.js"></script>
+  <script src="js/json3.min.js"></script>
+  <script src="js/prettify.js"></script>  
+  <script src="js/chess.js"></script>
+
+  <div id="board" style="width: 300px"></div>
+  <script src="js/chessboard.js"></script>
+  <script type="text/javascript">
+    var board,
+    game = new Chess();
+
+    var makeRandomMove = function() {
+    var possibleMoves = game.moves();
+
+    // exit if the game is over
+    if (game.game_over() === true ||
+    game.in_draw() === true ||
+    possibleMoves.length === 0) return;
+
+    var randomIndex = Math.floor(Math.random() * possibleMoves.length);
+    game.move(possibleMoves[randomIndex]);
+    board.position(game.fen());
+    
+    window.setTimeout(makeRandomMove, 500);
+    };
+
+    board = new ChessBoard('board', 'start');
+
+    window.setTimeout(makeRandomMove, 500);
+  </script>
+</html>
