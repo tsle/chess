@@ -11,6 +11,8 @@
   <script src="js/json3.min.js"></script>
   <script src="js/prettify.js"></script>  
   <script src="js/chess.js"></script>
+  <script src="js/ab.js"></script>
+  <script src="js/negamax.js"></script>
 
   <div id="board" style="width: 300px"></div>
   <script src="js/chessboard.js"></script>
@@ -26,12 +28,17 @@
     game.in_draw() === true ||
     possibleMoves.length === 0) return;
 
-    var randomIndex = Math.floor(Math.random() * possibleMoves.length);
+    /*var randomIndex = Math.floor(Math.random() * possibleMoves.length);
     game.move(possibleMoves[randomIndex]);
+    board.position(game.fen());
+    */
+
+    game.move(negaMax(game, 2, game.turn()));
     board.position(game.fen());
     
     window.setTimeout(makeRandomMove, 500);
-    };
+
+    }; 
 
     board = new ChessBoard('board', 'start');
 
