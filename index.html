@@ -32,8 +32,12 @@
     game.move(possibleMoves[randomIndex]);
     board.position(game.fen());
     */
-
-    game.move(negaMax(game, 2, game.turn()));
+    var turn = game.turn() === 'w';
+    if(turn) {
+      game.move(abMinMax(game, 3, turn));
+    } else {
+      game.move(negaMax(game, 2, game.turn()));
+    }
     board.position(game.fen());
     
     window.setTimeout(makeRandomMove, 500);
